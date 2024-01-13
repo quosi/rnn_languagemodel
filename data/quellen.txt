@@ -1,0 +1,5 @@
+Literatur vom Gutenbergprojekt:
+https://archive.org/details/gutenberg?sort=-downloads&and%5B%5D=mediatype%3A%22texts%22&and%5B%5D=language%3A%22German%22&and%5B%5D=collection%3A%22gutenberg%22
+
+Emails aus dem Github Repository:
+https://github.com/codealltag/CodEAlltag_pXL_GERMAN/blob/master/1-/10-/100001.txt
