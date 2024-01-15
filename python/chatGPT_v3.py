@@ -27,7 +27,7 @@ def create_tokens(text, n=2):
     for ngram in ngrams_list:
         ngram_dict[ngram] += 1
 
-    return ngram_dict
+    return ngram_dict  # is ngram_freq
 
 
 # Define Function
@@ -71,7 +71,7 @@ if __name__ == '__main__':
     # Interactively test the model with user input
     user_input = input("Enter a prefix for next-word prediction: ").lower().split()
     N = 2
-    text_input = read_file('data/Drei-Meister-Balzac-Dickens-Dostojewski_Stefan-Zweig_Projekt-Gutenberg_36389-8.txt')
+    text_input = read_file(r'C:\Users\heike.quosdorf\Projects\BHT_DeepLearning\deeplearning_playground\public\data\Drei-Meister-Balzac-Dickens-Dostojewski_Stefan-Zweig_Projekt-Gutenberg_36389-8.txt')
     ngram_freq = create_tokens(text_input, N)
 
     if len(user_input) != N - 1:

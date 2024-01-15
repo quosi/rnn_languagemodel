@@ -1,0 +1,13 @@
+async function handleUserInput() {
+    // get text base
+    const localTextDataPath = './data/Gutenberg_eBook_de_oliver_twist.txt';
+    var reader = new FileReader();
+    reader.readAsText(localTextDataPath, "UTF-8");
+    const text = reader.target.result;
+
+    console.log(text.slice(0,30));
+    const sampleLen = model.inputs[0].shape[1];
+    const sampleStep = 3; // Step length: how many characters to skip between one example; Default: 3
+    if (textData == null){
+        textDate = new TextData('Dickens', text, sampleLen, sampleStep);
+    };

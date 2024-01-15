@@ -15,28 +15,43 @@ body {
     margin: 0;
 }
 
- h1,h2, h3, div, label {
+ h1,h2, h3, div, label, p, img {
     margin-left: 30px;
     margin-bottom: 5px;
-
 }
 
-#send-button {
-    margin-top: 10px;
-    padding: 5px 10px;
-}
-
-
-.container {
-    margin-left: 200px;
-    margin-top: 50px;
-}
-
-input {
+input, textarea {
     padding: 10px;
     margin-left: 40px;
     font-size: 16px;
     width: 200px;
+}
+
+#input1, #input2{
+    margin-left:-75px;
+    margin-right:-70px;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+textarea {
+    font-family: Arial, sans-serif;
+}
+
+.formfield {
+    display: flex;
+    align-items: top;
+    margin-left:0px;
+    margin-top:20px;
+}
+
+.formfield-extra {
+    margin-top:10px;
+    margin-left: 0px;
+}
+
+.nav {
+    margin-left: 0px;
 }
 
 
@@ -77,16 +92,6 @@ html {
   line-height: 1.4;
 }
 
-/*
- * Remove text-shadow in selection highlight:
- * https://twitter.com/miketaylr/status/12228805301
- *
- * Vendor-prefixed and regular ::selection selectors cannot be combined:
- * https://stackoverflow.com/a/16982510/7133471
- *
- * Customize the background color to match your design.
- */
-
 ::-moz-selection {
   background: #b3d4fc;
   text-shadow: none;
@@ -108,6 +113,8 @@ hr {
   border-top: 1px solid #ccc;
   margin: 1em 0;
   padding: 0;
+  margin-top:20px;
+  margin-bottom:30px;
 }
 
 /*
@@ -135,17 +142,6 @@ fieldset {
   padding: 0;
 }
 
-/*
- * Allow only vertical resizing of textareas.
- */
-
-textarea {
-  resize: vertical;
-}
-
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
 
 /* ==========================================================================
    Helper classes

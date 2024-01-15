@@ -8,52 +8,52 @@
 </head>
 <body>
 <header>
-  <div id="nav-menu">
+  <div class="nav" id="nav-menu">
     <ul>
       <li><a class="active" href="index.html">Word Prediction</a></li>
       <li><a href="documentation.html">Documentation</a></li>
     </ul>
   </div>
 </header>
-
 <p> </p>
 <h1>DL Word Prediction</h1>
 <h2>EA 3: Training verschiedener RNN Modele zur Wort-Vorhersage</h2>
 <p> </p>
-<p> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</p>
+<hr>
 <p> </p>
 <h3>Step 1 - Model auswählen </h3>
-<label>
-  Wähle ein Model aus:
-  <select id="model" onchange="loadModel()">
-    <option value="LSTM" selected>LSTM RNN Model
-    <option value="ALGO">Algorithmische Implimentierung
-  </select>
-</label>
 <p> </p>
-<p> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</p>
+<label><input type="radio" id="input1" name="model" value="LSTM" checked> <b>LSTM Recurrent Neural Network</b> (Vorhersage einzelner Buchstaben)</label>
+<p> </p>
+<label><input type="radio" id="input2" name="model" value="ALGO"> <b>Algorithmische Lösung</b> (Vorhersage der nächsten Worte)</label>
+<p> </p>
+<hr>
 <p> </p>
 <h3> Step 2 - Konfiguration </h3>
 <p> </p>
 <label for="generate-length">Anzahl der vorherzusagenden Buchstaben : </label>
-<input type="number" id="generate-length" min="1" max="20" value="10" style="height:18px; width:50px"><br><br>
-
+<input type="number" id="generate-length" min="1" max="15" value="10" style="height:18px; width:50px">
+<br><br>
 <label for="temperature">Temperatur / Koinzidenzfaktor (Wert 0 bis 1):</label>
-<input type="number" id="temperature" min="0" max="1" step="0.01" value="0.2" style="height:18px; width:50px"><br><br>
-
-<label for="seedTextInput">Eingabe für Vorhersage:</label>
-<input type="text" id="seedTextInput" placeholder="Gebe ein Wort ein ..." style="height:18px; width:200px"><br><br>
+<input type="number" id="temperature" min="0.01" max="1" step="0.01" value="0.2" style="height:18px; width:50px">
+<br><br>
+<label for="seed-text">Eingabe für Vorhersage:</label>
+<input type="text" id="seed-text" style="height:18px; width:350px" placeholder="Heute morgen dachte ich ...">
+<br><br>
 <p> </p>
-<p> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</p>
+<hr>
 <p> </p>
 <h3> Step 3 - Wortvorhersage </h3>
 <p> </p>
-<label for="generatedTextInput">Ausgabe der Vorhersage:</label>
-<input type="text" id="generatedTextInput" placeholder="Text wird geschrieben ..." readonly="readonly" style="height:18px; width:200px">
-
+<div class="formfield">
+  <div class="formfield-extra"><label id="box-label" for="generated-text">Ausgabe der Vorhersage:</label></div>
+  <textarea class="scrollabletextbox" id="generated-text" style="height:100px; width:350px" placeholder="Ich denke nach ..."></textarea>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
-<script src="https://cdn.jsdelivr.net/npm/fs-utils@0.7.0/index.min.js"></script>
+<script src="https://unpkg.com/compromise"></script>
+<script src="./text.js"></script>
 <script src="./data.js"></script>
 <script src="./app.js"></script>
+<script src="./algo.js"></script>
 </body>
 </html>

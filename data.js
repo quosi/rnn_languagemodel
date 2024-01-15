@@ -1,6 +1,3 @@
-// import * as https from 'https';
-// import * as tf from '@tensorflow/tfjs';
-
 const TEXT_DATA_URLS = {
   'dickens': {
   url:
@@ -57,13 +54,13 @@ class TextData {
     this.sampleLen_ = sampleLen;
     this.sampleStep_ = sampleStep;
 
-    this.getCharSet_();
+    this.charSet_ = [' ', 'O', 'l', 'i', 'v', 'e', 'r', 'T', 'w', 's', 't', 'o', 'n', 'C', 'h', 'a', 'D', 'c', 'k', 'm', 'b', 'g', 'p', 'E', 'u', 'J', 'G', 'V', '.', 'H', 'B', 'U', 'd', 'Ä', 'Y', ',', 'z', 'f', 'S', 'P', 'W', 'K', 'L', 'B', 'I', 'b', 'l', 'A', 'M', 'F', '7', '1', '8', '2', 'j', 'y', '3', 'R', 'T', 'u', '_', 'n', 'Z', ' ', '(', ')', ':', 'N', '9', '4', '0', '6', ';', '-', 'Q', '5', '!', '–', 'd', '?', 'x', '*', '[', ']', 'q', 'X', 'Y', '>', '<']
+    this.charSetSize_ = this.charSet_.length; // 89
     this.convertAllTextToIndices_();
   }
 
   /**
    * Get data identifier.
-   *
    * @returns {string} The data identifier.
    */
   dataIdentifier() {
@@ -72,7 +69,6 @@ class TextData {
 
   /**
    * Get length of the training text data.
-   *
    * @returns {number} Length of training text data.
    */
   textLen() {
@@ -88,7 +84,6 @@ class TextData {
 
   /**
    * Get the size of the character set.
-   *
    * @returns {number} Size of the character set, i.e., how many unique
    *   characters there are in the training text data.
    */
@@ -98,7 +93,6 @@ class TextData {
 
   /**
    * Generate the next epoch of data for training models.
-   *
    * @param {number} numExamples Number examples to generate.
    * @returns {[tf.Tensor, tf.Tensor]} `xs` and `ys` Tensors.
    *   `xs` has the shape of `[numExamples, this.sampleLen, this.charSetSize]`.
@@ -128,7 +122,6 @@ class TextData {
 
   /**
    * Get the unique character at given index from the character set.
-   *
    * @param {number} index
    * @returns {string} The unique character at `index` of the character set.
    */
@@ -138,7 +131,6 @@ class TextData {
 
   /**
    * Convert text string to integer indices.
-   *
    * @param {string} text Input text.
    * @returns {number[]} Indices of the characters of `text`.
    */
@@ -152,7 +144,6 @@ class TextData {
 
   /**
    * Get a random slice of text data.
-   *
    * @returns {[string, number[]} The string and index representation of the
    *   same slice.
    */
@@ -165,7 +156,6 @@ class TextData {
 
   /**
    * Get a slice of the training text data.
-   *
    * @param {number} startIndex
    * @param {number} endIndex
    * @param {bool} useIndices Whether to return the indices instead of string.
@@ -173,19 +163,6 @@ class TextData {
    */
   slice_(startIndex, endIndex) {
     return this.textString_.slice(startIndex, endIndex);
-  }
-
-  /**
-   * Get the set of unique characters from text.
-   */
-  getCharSet_() {
-    this.charSet_ = [];
-    for (let i = 0; i < this.textLen_; ++i) {
-      if (this.charSet_.indexOf(this.textString_[i]) === -1) {
-        this.charSet_.push(this.textString_[i]);
-      }
-    }
-    this.charSetSize_ = this.charSet_.length;
   }
 
   /**
@@ -213,27 +190,3 @@ class TextData {
   }
 }
 
-/**
- * Get a file by downloading it if necessary.
- *
- * @param {string} sourceURL URL to download the file from.
- * @param {string} destPath Destination file path on local filesystem.
- */
-async function maybeDownload(sourceURL, destPath) {
-  const fs = require('fs');
-  return new Promise(async (resolve, reject) => {
-    if (!fs.existsSync(destPath) || fs.lstatSync(destPath).size === 0) {
-      const localZipFile = fs.createWriteStream(destPath);
-      console.log(`Downloading file from ${sourceURL} to ${destPath}...`);
-      https.get(sourceURL, response => {
-        response.pipe(localZipFile);
-        localZipFile.on('finish', () => {
-          localZipFile.close(() => resolve());
-        });
-        localZipFile.on('error', err => reject(err));
-      });
-    } else {
-      return resolve();
-    }
-  });
-}
